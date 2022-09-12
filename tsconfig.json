@@ -20,7 +20,6 @@
             "baseUrl": ".",
             "allowSyntheticDefaultImports": true,
             "noUnusedLocals": true,
-            "noUnusedParameters": true,
             "noImplicitReturns": true,
             "noFallthroughCasesInSwitch": true,
             "removeComments": true,
