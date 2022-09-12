@@ -5,7 +5,7 @@ import { FolderNames } from 'src/types.js';
  *  function to check if the image exist or not in two folders[FolderNames]
  * mainly used to check if the image in thumbnail in not search for it in full and process it
  * @param folder string
- * @param name string
+ * @param name string file complete name with exstension
  * @returns Promise<boolean>
  */
 export async function isFileExist(
@@ -41,6 +41,3 @@ export async function createFolderStructure(): Promise<void> {
     await fs.mkdir(path.resolve('public/full'), { recursive: true });
     await fs.mkdir(path.resolve('public/thumbnail'), { recursive: true });
 }
-// export async function saveNewImage(path: string, name: string): Promise<void> {
-//     await fs.rename(path, name);
-// }

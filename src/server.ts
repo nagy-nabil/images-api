@@ -20,6 +20,15 @@ server.get('/', (req, res) => {
 server.use('/image', express.static(path.resolve('public/full')));
 //serve thumbnail and handle new uploads
 server.use('/image', imageRouter);
+//! only for testing
+server.get('/file-error', (req, res) => {
+    throw new Error(
+        'if the error include Input file is missing send  no such file'
+    );
+});
+server.get('/error', (req, res) => {
+    throw new Error('throw error');
+});
 //! middleware to catch any errors were thrown in any of the middlewares or any controller
 server.use(
     (
@@ -28,7 +37,10 @@ server.use(
         res: express.Response,
         next: express.NextFunction
     ) => {
-        res.status(400).send('NO SUCH FILE');
+        let errMsg = err.message;
+        if (err.message.includes('Input file is missing'))
+            errMsg = 'no such file';
+        res.status(400).json({ error: errMsg });
     }
 );
 //! if the server reached this middleware without matching any endpoint means that point doesn't exist [404]

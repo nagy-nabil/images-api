@@ -3,7 +3,7 @@ import path from 'path';
 import formidable from 'formidable';
 import { saveNewIamge, createThumbName, imageProcess } from './imageprocess.js';
 import { FolderNames } from '../../types.js';
-import { isFileExist } from '../fsprocess.js';
+import { isFileExist } from '../fs/fsprocess.js';
 const imageRouter = Router();
 //controller for uploading images as [multipart/form-data] with formidable
 function uploadImage(req: Request, res: Response, next: NextFunction) {
@@ -33,7 +33,7 @@ function uploadImage(req: Request, res: Response, next: NextFunction) {
                 uploadedImages.newFilename
             );
         }
-        res.end();
+        res.status(201).end();
         return;
     });
     return;

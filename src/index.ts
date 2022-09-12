@@ -2,7 +2,7 @@ import server from './server.js';
 import {
     isFolderStructureExist,
     createFolderStructure
-} from './utils/fsprocess.js';
+} from './utils/fs/fsprocess.js';
 async function main(): Promise<void | Error> {
     if (!(await isFolderStructureExist())) {
         await createFolderStructure();
