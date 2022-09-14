@@ -66,7 +66,12 @@ header h1 {
 
 }
 #gallery .subImages img {
-    width: 10em;
-    height: 10rem;
+    width: 12em;
+    height: 12rem;
     flex-basis: 350px;
+}
+footer {
+    position:fixed;
+    bottom: 0;
+    width: 100%;
 }

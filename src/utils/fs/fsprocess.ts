@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { FolderNames } from 'src/types.js';
+import { FolderNames } from '../../types.js';
 /**
  *  function to check if the image exist or not in two folders[FolderNames]
  * mainly used to check if the image in thumbnail in not search for it in full and process it
@@ -40,4 +40,8 @@ export async function isFolderStructureExist(): Promise<boolean> {
 export async function createFolderStructure(): Promise<void> {
     await fs.mkdir(path.resolve('public/full'), { recursive: true });
     await fs.mkdir(path.resolve('public/thumbnail'), { recursive: true });
+}
+export async function dirContent(folder: FolderNames): Promise<string[]> {
+    const files = await fs.readdir(path.resolve(`public/${folder}`));
+    return files;
 }

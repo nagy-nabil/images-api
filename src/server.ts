@@ -10,9 +10,12 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 //middleware to log any server action
 server.use(morgan('dev'));
+//to serve css and js files for main page
+server.use('/css', express.static(path.resolve('view/css')));
+server.use('/js', express.static(path.resolve('view/js')));
 //controller for main page
 server.get('/', (req, res) => {
-    res.send('welcome');
+    res.sendFile(path.resolve('view/index.html'));
 });
 //middleware to serve images from public [i will serve two folders full and thumbnail] if the user supplied query contain image width and size =>serve the image from thumbnail
 //if the user didn't supply query serve from full
@@ -38,9 +41,14 @@ server.use(
         next: express.NextFunction
     ) => {
         let errMsg = err.message;
+        res.status(400);
         if (err.message.includes('Input file is missing'))
             errMsg = 'no such file';
-        res.status(400).json({ error: errMsg });
+        if (err.message.includes('no such file or directory')) {
+            errMsg = 'server error please try again later';
+            res.status(500);
+        }
+        res.json({ error: errMsg });
     }
 );
 //! if the server reached this middleware without matching any endpoint means that point doesn't exist [404]

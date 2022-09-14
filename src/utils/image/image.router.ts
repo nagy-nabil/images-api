@@ -3,7 +3,7 @@ import path from 'path';
 import formidable from 'formidable';
 import { saveNewIamge, createThumbName, imageProcess } from './imageprocess.js';
 import { FolderNames } from '../../types.js';
-import { isFileExist } from '../fs/fsprocess.js';
+import { isFileExist, dirContent } from '../fs/fsprocess.js';
 const imageRouter = Router();
 //controller for uploading images as [multipart/form-data] with formidable
 function uploadImage(req: Request, res: Response, next: NextFunction) {
@@ -65,5 +65,20 @@ async function sendThumbnail(req: Request, res: Response, next: NextFunction) {
         next(err);
     }
 }
+// end point send all images names from full dir to the front end to create gallery
+async function alreadyExistImages(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    try {
+        const files = await dirContent(FolderNames.FULL);
+        res.status(200).json({ images: files });
+    } catch (err) {
+        next(err);
+        return;
+    }
+}
 imageRouter.route('').post(uploadImage).get(sendThumbnail);
+imageRouter.get('/gallery', alreadyExistImages);
 export default imageRouter;

@@ -48,7 +48,7 @@ export async function imageProcess(
     }
 }
 /**
- *  take file path to image and store it in the full dir
+ *  take file path to image and store it in the full dir , accept any image exstension and convert all to jpg
  * if the path exist resolve with nothing, otherwise reject with error
  * @param filePath string complete file path to the image
  * @param fileName the new image name without extension
