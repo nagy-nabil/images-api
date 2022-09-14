@@ -4,7 +4,8 @@ import { unlink } from 'fs/promises';
 import {
     createFolderStructure,
     isFileExist,
-    isFolderStructureExist
+    isFolderStructureExist,
+    dirContent
 } from '../utils/fs/fsprocess.js';
 import { FolderNames } from '../types.js';
 import { createThumbName } from '../utils/image/imageprocess.js';
@@ -105,6 +106,13 @@ describe('/image endpoint', () => {
             expect(res.statusCode).toBe(201);
             expect(flag).toBeTrue();
             await unlink(path.resolve('public/full/test-image.jpg'));
+        });
+    });
+    describe('get all full dir images names', () => {
+        it('/image/gallery', async () => {
+            const res = await serverRNN.get('/image/gallery');
+            expect(res.statusCode).toBe(200);
+            expect(res.body.images).toEqual(await dirContent(FolderNames.FULL));
         });
     });
 });
