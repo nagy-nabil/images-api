@@ -5,6 +5,7 @@ image processing API, used to resize images
 - take input any type of images extension but internally convert every image to .jpg 
 - serve images of any size wanted
 - serve endpoint to create gallery from uploaded  images
+- the apility to upload new images 
 
 ## endPoints
 - '/'
