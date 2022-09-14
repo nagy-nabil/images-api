@@ -1,8 +1,4 @@
-import {
-    isFileExist,
-    isFolderStructureExist,
-    createFolderStructure
-} from '../../../utils/fs/fsprocess.js';
+import { isFileExist } from '../../../utils/fs/fsprocess.js';
 import { FolderNames } from '../../../types.js';
 describe('util/fs/fsprocess', () => {
     describe('isFileExist, check if an image already exist is one of the two folders full, thumbnal', () => {

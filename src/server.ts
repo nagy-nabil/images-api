@@ -4,7 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import imageRouter from './utils/image/image.router.js';
 const server = express();
-//middlewares for absic config for the server
+//middlewares for basic config for the server
 server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));

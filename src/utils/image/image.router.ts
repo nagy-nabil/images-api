@@ -38,7 +38,7 @@ function uploadImage(req: Request, res: Response, next: NextFunction) {
     });
     return;
 }
-//to serve thumbnail
+//controller to serve thumbnails
 async function sendThumbnail(req: Request, res: Response, next: NextFunction) {
     try {
         const { filename, width, height } = req.query;
