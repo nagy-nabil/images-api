@@ -20,12 +20,13 @@ const handleSubmit = async (event) => {
     }
     return false;
 };
-function readURL(input) {
+function shwoPreview(input) {
+    //only if the user supplied files
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            e.preventDefault()
+            //create image and add it to the gallery
             const img = document.createElement('img');
             img.src=e.target.result
             gallery.appendChild(img);

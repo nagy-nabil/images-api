@@ -15,7 +15,7 @@
           "prettier/prettier": 1 ,
           "no-use-before-define": ["error", { "functions": true, "classes": true }],
           "no-var": "error",
-          // "no-unused-vars":"off",
+          "no-unused-vars":"off",
           "prefer-const": "error"
         },
         "parserOptions": {

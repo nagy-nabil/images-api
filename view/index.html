@@ -18,7 +18,7 @@
 <div  class="secondSection">
     <form id="uploadImageForm" onSubmit="return false; // Returning false stops the page from reloading">
         <label for="picUpload" >upload image to the server</label>
-        <input type="file"  id="picUpload" accept="image/png, image/jpeg" class="formButtons" name="image" multiple onchange="readURL(this)"/>
+        <input type="file"  id="picUpload" accept="image/png, image/jpeg" class="formButtons" name="image" multiple onchange="shwoPreview(this)"/>
         <button type="submit" class="formButtons" id="submitButton">UPLAOAD</button> 
     </form>
 </div>   
