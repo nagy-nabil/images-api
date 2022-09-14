@@ -14,8 +14,9 @@ server.use(morgan('dev'));
 server.use('/css', express.static(path.resolve('view/css')));
 server.use('/js', express.static(path.resolve('view/js')));
 //controller for main page
-server.get('/', (req, res) => {
+server.get('/', (req: express.Request, res: express.Response): void => {
     res.sendFile(path.resolve('view/index.html'));
+    return;
 });
 //middleware to serve images from public [i will serve two folders full and thumbnail] if the user supplied query contain image width and size =>serve the image from thumbnail
 //if the user didn't supply query serve from full
@@ -24,12 +25,15 @@ server.use('/image', express.static(path.resolve('public/full')));
 //serve thumbnail and handle new uploads
 server.use('/image', imageRouter);
 //! only for testing
-server.get('/file-error', (req, res) => {
-    throw new Error(
-        'if the error include Input file is missing send  no such file'
-    );
-});
-server.get('/error', (req, res) => {
+server.get(
+    '/file-error',
+    (req: express.Request, res: express.Response): void => {
+        throw new Error(
+            'if the error include Input file is missing send  no such file'
+        );
+    }
+);
+server.get('/error', (req: express.Request, res: express.Response): void => {
     throw new Error('throw error');
 });
 //! middleware to catch any errors were thrown in any of the middlewares or any controller
@@ -39,7 +43,7 @@ server.use(
         req: express.Request,
         res: express.Response,
         next: express.NextFunction
-    ) => {
+    ): void => {
         let errMsg = err.message;
         res.status(400);
         if (err.message.includes('Input file is missing'))
@@ -52,7 +56,8 @@ server.use(
     }
 );
 //! if the server reached this middleware without matching any endpoint means that point doesn't exist [404]
-server.use((req, res) => {
+server.use((req: express.Request, res: express.Response): void => {
     res.status(404).send('404 NOT FOUND');
 });
+//export express application to listen to it in index.ts
 export default server;

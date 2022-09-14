@@ -1,6 +1,12 @@
 # images-api
 image processing API, used to resize images 
-
+## notice before running 
+you need to add .env file containing PORT number and the start script is designed to work with the port in the env file <br/>
+ ***or by default the server will run on port 3000***
+ <br/> **.env examble where the server will run on PORT 8000**
+ ```
+ PORT = 8000 
+ ```
 ## functionality 
 - take input any type of images extension but internally convert every image to .jpg 
 - serve images of any size wanted

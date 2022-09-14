@@ -6,7 +6,7 @@ import { FolderNames } from '../../types.js';
 import { isFileExist, dirContent } from '../fs/fsprocess.js';
 const imageRouter = Router();
 //controller for uploading images as [multipart/form-data] with formidable
-function uploadImage(req: Request, res: Response, next: NextFunction) {
+function uploadImage(req: Request, res: Response, next: NextFunction): void {
     const uploadedForm = formidable({
         multiples: true,
         maxFileSize: 50 * 1024 * 1024,
@@ -14,7 +14,7 @@ function uploadImage(req: Request, res: Response, next: NextFunction) {
             return name;
         }
     }); //max 5mb
-    uploadedForm.parse(req, async (err: Error, _, files) => {
+    uploadedForm.parse(req, async (err: Error, _, files): Promise<void> => {
         if (err) return next(err);
         if (!('image' in files)) {
             next(new Error('only accept file field called image'));
@@ -24,7 +24,7 @@ function uploadImage(req: Request, res: Response, next: NextFunction) {
         const uploadedImages = files.image;
         //type gurd to deal if the user send more than one image
         if (Array.isArray(uploadedImages)) {
-            uploadedImages.forEach(async (image) => {
+            uploadedImages.forEach(async (image: formidable.File) => {
                 await saveNewIamge(image.filepath, image.newFilename);
             });
         } else {
@@ -39,7 +39,11 @@ function uploadImage(req: Request, res: Response, next: NextFunction) {
     return;
 }
 //controller to serve thumbnails
-async function sendThumbnail(req: Request, res: Response, next: NextFunction) {
+async function sendThumbnail(
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> {
     try {
         const { filename, width, height } = req.query;
         if (
@@ -70,7 +74,7 @@ async function alreadyExistImages(
     req: Request,
     res: Response,
     next: NextFunction
-) {
+): Promise<void> {
     try {
         const files = await dirContent(FolderNames.FULL);
         res.status(200).json({ images: files });
@@ -79,6 +83,7 @@ async function alreadyExistImages(
         return;
     }
 }
+//mount the controller over the end points
 imageRouter.route('').post(uploadImage).get(sendThumbnail);
 imageRouter.get('/gallery', alreadyExistImages);
 export default imageRouter;
