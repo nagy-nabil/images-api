@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  imageapi:
+    image: nagynabil/imageapi:1.2
+    ports:
+      - 8000:8000
+    environment:
+      - PORT=8000
+    volumes:
+      - static-files:/node/imageApi/public
+volumes:
+  static-files:
+    driver: local

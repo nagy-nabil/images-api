@@ -1,5 +1,13 @@
 # images-api
 image processing API, used to resize images 
+## docker
+> our api now has docker image through docker hub [nagynabil/imageapi](https://hub.docker.com/repository/docker/nagynabil/imageapi) !
+
+repo contain both ***Dokcerfile*** and ***docker-compose.yml***  compose file contain an example how to use imageapi Image from docker hub
+if you have docker installed in your machine you could only download ***docker-compose.yml*** and use the following command to start the contanier 
+```
+docker-compose -f docker-compose.yml up
+```
 ## notice before running 
 you need to add .env file containing PORT number and the start script is designed to work with the port in the env file <br/>
  ***or by default the server will run on port 3000***
