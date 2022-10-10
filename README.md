@@ -3,7 +3,7 @@ image processing API, used to resize images
 ## docker
 > our api now has docker image through docker hub [nagynabil/imageapi](https://hub.docker.com/repository/docker/nagynabil/imageapi) !
 
-repo contain both ***Dokcerfile*** and ***docker-compose.yml***  compose file contain an example how to use imageapi Image from docker hub
+repo contain both ***[Dokcerfile](./Dockerfile)*** and ***[docker-compose.yml](./docker-compose.yml)***  compose file contain an example how to use imageapi Image from docker hub
 if you have docker installed in your machine you could only download ***docker-compose.yml*** and use the following command to start the contanier 
 ```
 docker-compose -f docker-compose.yml up
